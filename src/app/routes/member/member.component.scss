@@ -1,0 +1,38 @@
+header {
+	background: #36454f;
+	.container {
+		display: flex;
+		padding: 10px;
+		.logo {
+			color: #fff;
+			h2 {
+				margin: 0;
+				letter-spacing: 3px;
+			}
+		}
+		.navigation {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.user {
+			> div {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.avatar {
+
+					img {
+						width: 32px;
+						border-radius: 50%;
+					}
+				}
+				.name {
+					color: #fff;
+				}
+			}
+			
+		}
+	}
+}

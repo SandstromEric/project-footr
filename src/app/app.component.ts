@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router'
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -11,14 +12,21 @@ import * as firebase from 'firebase/app';
 })
 export class AppComponent {
     items: Observable<any[]>;
-    constructor(db: AngularFirestore, public afAuth: AngularFireAuth) {
+    redirected: boolean = false;
+
+    constructor(db: AngularFirestore, private afAuth: AngularFireAuth, private router: Router) {
         this.items = db.collection('items').valueChanges();
     }
-
-    login() {
-        this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    }
-    logout() {
-        this.afAuth.auth.signOut();
+    ngOnInit() {
+        this.afAuth.authState.subscribe(user => {
+            if (user) {
+                if(!this.redirected) {
+                    this.router.navigate(['/member'])
+                    this.redirected == true;
+                }
+            } else {
+                this.router.navigate(['/guest'])
+            }
+        });
     }
 }
