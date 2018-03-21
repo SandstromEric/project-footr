@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { GuestComponent } from './guest/guest.component';
+import { AuthGuardService } from '../auth/authguard.service';
+import { GuestGuardService } from '../auth/guestguard.service';
 
 const routes: Routes = [
     //{ path: '', redirectTo: '/guest', pathMatch: 'full' },
-    { path: 'guest', component: GuestComponent },
-    { path: 'member', loadChildren: './member/member.module#MemberModule'},
+    { path: 'guest', component: GuestComponent, /* canActivate: [GuestGuardService] */},
+    { path: 'member', loadChildren: './member/member.module#MemberModule', canLoad: [AuthGuardService]},
     { path: '**', redirectTo: '/guest', pathMatch: 'full' }
 ];
 

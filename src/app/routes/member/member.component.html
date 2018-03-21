@@ -5,6 +5,11 @@
         </div>
         <div class="navigation">
             <!-- <a routerLink="dashboard">test</a> -->
+            <nav mat-tab-nav-bar>
+                <a mat-tab-link *ngFor="let link of navLinks" routerLink="./{{link.path}}" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+                    {{link.label}}
+                </a>
+            </nav>
         </div>
         <div class="user">
             <!-- <button mat-raised-button (click)="signOut()">SignOut</button>   -->
@@ -23,6 +28,5 @@
         </div>
     </div>
 </header>
-
 
 <router-outlet></router-outlet>

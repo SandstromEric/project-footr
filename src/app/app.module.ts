@@ -11,7 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 
 import { AuthService } from './auth/auth.service';
-
+import { AuthGuardService } from './auth/authguard.service';
+import { GuestGuardService } from './auth/guestguard.service';
 @NgModule({
     declarations: [
         AppComponent,
@@ -26,7 +27,7 @@ import { AuthService } from './auth/auth.service';
         AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
         AngularFireStorageModule // imports firebase/storage only needed for storage features
     ],
-    providers: [AuthService],
+    providers: [AuthService, AuthGuardService, GuestGuardService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,6 +8,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class MemberComponent implements OnInit {
     user;
+    navLinks = [
+        {label: 'Dashboard', path: ''}
+    ];
     constructor(private authService: AuthService, private afAuth: AngularFireAuth) { }
 
     ngOnInit() {
