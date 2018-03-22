@@ -8,11 +8,13 @@ import { MaterialModule } from '../../material/material.module';
 import { Routes, RouterModule } from '@angular/router';
 import { MemberComponent } from './member.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TournamentsComponent } from './tournaments/tournaments.component';
 
 const memberRoutes: Routes = [
     {
         path: '', component: MemberComponent, children: [
-            { path: '', component: DashboardComponent },
+            { path: 'dashboard', component: DashboardComponent },
+            { path: 'tournaments', component: TournamentsComponent }
         ]
     }
 ];
@@ -30,7 +32,7 @@ const memberRoutes: Routes = [
         RouterModule
     ],
     declarations: [
-        MemberComponent, DashboardComponent
+        MemberComponent, DashboardComponent, TournamentsComponent
     ],
     providers: []
 })
