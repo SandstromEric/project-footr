@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Create Tournament</h2>
+<mat-dialog-content [formGroup]="form">
+
+    <mat-form-field>
+        <input [(ngModel)]="name" formControlName="name" matInput placeholder="Name" required>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select [(ngModel)]="league" formControlName="league" placeholder="League" required>
+            <mat-option value="123">Option</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-slide-toggle [(ngModel)]="private" formControlName="private">Private</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="adminJoin" formControlName="adminJoin" [checked]="true">Admin participating</mat-slide-toggle>
+    <label>Players</label>
+    <mat-slider [(ngModel)]="players" formControlName="players" [thumbLabel]="true" min="2" max="30" step="1" value="1"></mat-slider>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close color="warn">Cancel</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-raised-button color="primary" (click)="save()">Create</button>
+</mat-dialog-actions>
