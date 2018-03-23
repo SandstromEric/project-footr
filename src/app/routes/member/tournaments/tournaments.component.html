@@ -1,8 +1,22 @@
 <div class="container">
     <mat-card>
-        test
+        <mat-card-title>My Tournaments</mat-card-title>
+        <mat-card-content>
+            You do not participate in any tournaments.
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="openDialog()">
+                <span>Create</span>
+            </button>
+            <button mat-raised-button color="accent" disabled>
+                <span>Find</span>
+            </button>
+        </mat-card-actions>
     </mat-card>
     <mat-card>
-        test
+        <mat-card-title>Tournament Invites</mat-card-title>
+        <mat-card-content>
+            You do not have any invites.
+        </mat-card-content>
     </mat-card>
 </div>

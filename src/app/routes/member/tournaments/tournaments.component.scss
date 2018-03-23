@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	mat-card {
+		flex: 0 1 550px;
+
+		&:first-child {
+			margin-right: 10px;
+		}
+	}
+}

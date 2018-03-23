@@ -14,12 +14,23 @@
         <div class="user">
             <!-- <button mat-raised-button (click)="signOut()">SignOut</button>   -->
             <div *ngIf="user">
-                <button mat-button class="name" [matMenuTriggerFor]="appMenu">
+                <button mat-button class="name" [matMenuTriggerFor]="userMenu">
                     {{user.displayName}}
                     <i class="material-icons">keyboard_arrow_down</i>
                 </button>
-                <mat-menu #appMenu="matMenu">
-                    <button mat-menu-item (click)="signOut()">Log Out</button>
+                <mat-menu #userMenu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>account_box</mat-icon>
+                        <span>My profile</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>settings</mat-icon>
+                        <span>Settings</span>
+                    </button>
+                    <button mat-menu-item (click)="signOut()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Sign out</span>
+                    </button>
                 </mat-menu>
                 <div class="avatar">
                     <img [src]="user.photoURL" alt="user-avatar">

@@ -9,6 +9,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MemberComponent } from './member.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TournamentsComponent } from './tournaments/tournaments.component';
+import { TournamentCreateComponent } from './tournaments/tournament-create/tournament-create.component';
 
 const memberRoutes: Routes = [
     {
@@ -32,8 +33,9 @@ const memberRoutes: Routes = [
         RouterModule
     ],
     declarations: [
-        MemberComponent, DashboardComponent, TournamentsComponent
+        MemberComponent, DashboardComponent, TournamentsComponent, TournamentCreateComponent
     ],
+    entryComponents: [TournamentCreateComponent],
     providers: []
 })
 export class MemberModule { }
