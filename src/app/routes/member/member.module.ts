@@ -5,18 +5,22 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from '../../material/material.module';
 
+import { TournamentService } from '../../shared/tournament.service';
+
 import { Routes, RouterModule } from '@angular/router';
 import { MemberComponent } from './member.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TournamentsComponent } from './tournaments/tournaments.component';
 import { TournamentCreateComponent } from './tournaments/tournament-create/tournament-create.component';
 import { TournamentCreateDialogComponent } from './tournaments/tournament-create/tournament-create-dialog/tournament-create-dialog.component';
+import { TournamentDetailComponent } from './tournaments/tournament-detail/tournament-detail.component';
 
 const memberRoutes: Routes = [
     {
         path: '', component: MemberComponent, children: [
             { path: 'dashboard', component: DashboardComponent },
-            { path: 'tournaments', component: TournamentsComponent }
+            { path: 'tournaments', component: TournamentsComponent },
+            { path: 'tournaments/:id', component: TournamentDetailComponent }
         ]
     }
 ];
@@ -34,9 +38,9 @@ const memberRoutes: Routes = [
         RouterModule
     ],
     declarations: [
-        MemberComponent, DashboardComponent, TournamentsComponent, TournamentCreateComponent, TournamentCreateDialogComponent
+        MemberComponent, DashboardComponent, TournamentsComponent, TournamentCreateComponent, TournamentCreateDialogComponent, TournamentDetailComponent
     ],
     entryComponents: [TournamentCreateDialogComponent],
-    providers: []
+    providers: [TournamentService]
 })
 export class MemberModule { }

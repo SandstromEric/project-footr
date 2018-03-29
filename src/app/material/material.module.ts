@@ -11,6 +11,10 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
     imports: [],
     exports: [
@@ -25,7 +29,11 @@ import { MatInputModule } from '@angular/material/input';
         MatSliderModule,
         MatSelectModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatProgressSpinnerModule,
+        MatListModule,
+        MatDividerModule,
+        MatChipsModule
     ],
     declarations: []
 })

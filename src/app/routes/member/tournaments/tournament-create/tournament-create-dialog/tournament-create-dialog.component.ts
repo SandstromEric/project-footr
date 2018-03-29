@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthService } from '../../../../../auth/auth.service';
 
 @Component({
     selector: 'app-tournament-create-dialog',
@@ -38,8 +39,10 @@ export class TournamentCreateDialogComponent implements OnInit {
         })
     }
     save(): void {
-        this.dialogRef.close(this.form.value);
-        console.log(this.form.value);
+        
+        if(this.form.valid) {
+            this.dialogRef.close(this.form.value);
+        }
     }
 
 }

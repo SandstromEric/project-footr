@@ -1,0 +1,31 @@
+<div class="container">
+    <span *ngIf="tournament$ | async as tournament; else Loading">
+        <mat-tab-group>
+            <mat-tab label="Matches">
+
+                shared-component
+            </mat-tab>
+            <mat-tab label="Scoreboard">
+
+                shared-component
+            </mat-tab>
+            <mat-tab label="settings">
+                <ng-template mat-tab-label>
+                    <mat-icon>settings</mat-icon>
+                </ng-template>
+                <h2>Admin Settings</h2>
+                <mat-divider></mat-divider>
+                <h3>Users</h3>
+                <mat-form-field class="example-form-field">
+                    <input matInput type="text" placeholder="Search user" [(ngModel)]="value" />
+                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+            </mat-tab>
+        </mat-tab-group>
+    </span>
+    <ng-template #Loading>
+        <mat-spinner></mat-spinner>
+    </ng-template>
+</div>

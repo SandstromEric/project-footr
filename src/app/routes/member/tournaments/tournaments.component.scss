@@ -9,3 +9,26 @@
 		}
 	}
 }
+
+.tournament-meta {
+	position: absolute;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+mat-list {
+	span {
+		text-transform: capitalize;
+		
+	}
+	.tournament-name {
+		margin-left: 10px;
+	}
+}
+
+.private-indicator {
+	position: absolute;
+	left: 0;
+}
