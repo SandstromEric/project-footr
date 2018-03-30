@@ -2,7 +2,7 @@
     <mat-card>
         <mat-card-title>My Tournaments</mat-card-title>
         <mat-card-content>
-            <div *ngIf="tournamentService.myTournaments$ | async as tournaments; else loading">
+            <div *ngIf="myTournaments$ | async as tournaments; else loading">
                 <mat-list>
                     <mat-divider></mat-divider>
                     <span *ngFor="let tournament of tournaments">

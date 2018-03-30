@@ -13,7 +13,6 @@ export interface User {
 }
 @Injectable()
 export class TournamentService {
-    //test = "OaZFgAR6wWSC8RCXySZysqBCXpI2"
     user: User = {
         uid: this.afAuth.auth.currentUser.uid
     };
@@ -32,19 +31,19 @@ export class TournamentService {
         tournament.admin = this.user.uid;
         this.colRef = this.afs.collection('tournaments');
         this.colRef.add(tournament).then(doc => {
-            if(tournament.adminJoin == true) {
+            if (tournament.adminJoin == true) {
                 doc.collection(`users`).doc(tournament.admin).set({
                     name: this.user.displayName,
                     uid: this.user.uid,
                     score: 0
                 });
             }
-            
+
         })
     }
 
     myTournaments(): Observable<any> {
-        return this.myTournaments$ = this.afs.collection('tournaments', ref => ref.where('admin', '==', this.user.uid)).snapshotChanges().map(actions => {
+        return this.afs.collection('tournaments', ref => ref.where('admin', '==', this.user.uid)).snapshotChanges().map(actions => {
             return actions.map(action => {
                 const data = action.payload.doc.data();
                 const id = action.payload.doc.id;
@@ -53,8 +52,69 @@ export class TournamentService {
         });
     }
 
-    getTournament(id):Observable<any> {
+    getTournament(id): Observable<any> {
         this.docRef = this.afs.doc(`tournaments/${id}`);
         return this.docRef.valueChanges();
     }
+
+    getUsersByName(name: string): Observable<any> {
+        let strSearch = name.toLowerCase();
+        let strLength = strSearch.length;
+        let strFrontCode = strSearch.slice(0, strLength - 1);
+        let strEndCode = strSearch.slice(strLength - 1, strSearch.length);
+
+        let startcode = strSearch;
+        let endcode = strFrontCode + String.fromCharCode(strEndCode.charCodeAt(0) + 1);
+
+        this.colRef = this.afs.collection('users', ref => ref.where('queryName', '>=', startcode).where('queryName', '<', endcode));
+        return this.colRef.valueChanges();
+    }
+
+    inviteUser(tournamentID: string, userID: string): any {
+        let exists: boolean;
+        this.docRef = this.afs.collection('users').doc(userID).collection('tournamentInvites').doc(tournamentID);
+
+        this.docRef.update({})
+            .then(doc => {
+                exists = true;
+            }).catch(err => {
+                console.log('doc created')
+                this.docRef.set({
+                    tid: tournamentID
+                });
+                exists = false;
+            });
+        return setTimeout(()=> {
+            if(exists) {
+                return 'User already invited';
+            } else {
+                return 'User invited';
+            }
+        }, 1000)
+        
+    }
+
+    invitesPending(): Observable<any> {
+        this.colRef = this.afs.collection('users').doc(this.user.uid).collection('tournamentInvites');
+        return this.colRef.valueChanges();
+    }
+
+    /* alreadyInvited(tournamentID: string, userID: string): Observable<any> {
+        this.docRef = this.afs.collection('users').doc(userID).collection('tournamentInvites').doc(tournamentID);
+        return this.docRef.valueChanges();
+    } */
+
+    joinTournament() {
+
+    }
+
+    getPlayers(tournamentID: string): Observable<any> {
+        this.colRef = this.afs.collection('tournament').doc(tournamentID).collection('users');
+        return this.colRef.valueChanges();
+    }
+
+
+
+
+
 }

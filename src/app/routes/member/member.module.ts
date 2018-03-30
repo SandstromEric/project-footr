@@ -13,7 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TournamentsComponent } from './tournaments/tournaments.component';
 import { TournamentCreateComponent } from './tournaments/tournament-create/tournament-create.component';
 import { TournamentCreateDialogComponent } from './tournaments/tournament-create/tournament-create-dialog/tournament-create-dialog.component';
-import { TournamentDetailComponent } from './tournaments/tournament-detail/tournament-detail.component';
+import { TournamentDetailComponent, TournamentMessage } from './tournaments/tournament-detail/tournament-detail.component';
 
 const memberRoutes: Routes = [
     {
@@ -38,9 +38,9 @@ const memberRoutes: Routes = [
         RouterModule
     ],
     declarations: [
-        MemberComponent, DashboardComponent, TournamentsComponent, TournamentCreateComponent, TournamentCreateDialogComponent, TournamentDetailComponent
+        MemberComponent, DashboardComponent, TournamentsComponent, TournamentCreateComponent, TournamentCreateDialogComponent, TournamentDetailComponent, TournamentMessage
     ],
-    entryComponents: [TournamentCreateDialogComponent],
+    entryComponents: [TournamentCreateDialogComponent, TournamentMessage],
     providers: [TournamentService]
 })
 export class MemberModule { }

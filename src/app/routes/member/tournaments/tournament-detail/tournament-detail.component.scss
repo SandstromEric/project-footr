@@ -1,0 +1,49 @@
+mat-tab-group {
+	background: #fff;
+
+	.content{
+		padding: 20px;
+	}
+}
+h1 {
+	padding: 20px 10px;
+	text-transform: capitalize;
+}
+
+h2 {
+	margin-top: 0;
+}
+
+.container {
+	background: #fff;
+	border-radius: 3px;
+}
+
+mat-list {
+	padding: 0;
+	mat-list-item {
+		padding: 4px 0;
+		.item-container {
+			display: flex;
+			flex: 1;
+			> div {
+				display: flex;
+				align-items: center;
+			}
+			.photo {
+				margin-right: 10px;
+				
+				img {
+					border-radius: 50%;
+					border: 1px solid rgba(0,0,0,.12);
+				}
+			}
+			.name {
+				flex: 1;
+			}
+			.invite {
+	
+			}
+		}
+	}
+}

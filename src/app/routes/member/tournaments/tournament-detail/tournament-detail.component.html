@@ -1,29 +1,56 @@
 <div class="container">
     <span *ngIf="tournament$ | async as tournament; else Loading">
-        <mat-tab-group>
-            <mat-tab label="Matches">
+        <span *ngIf="auth.user | async as authUser">
+            <h1>{{tournament.name}}</h1>
+            <mat-divider></mat-divider>
+            <mat-tab-group color="accent">
+                <mat-tab label="Matches">
 
-                shared-component
-            </mat-tab>
-            <mat-tab label="Scoreboard">
+                    shared-component
+                </mat-tab>
+                <mat-tab label="Scoreboard">
 
-                shared-component
-            </mat-tab>
-            <mat-tab label="settings">
-                <ng-template mat-tab-label>
-                    <mat-icon>settings</mat-icon>
-                </ng-template>
-                <h2>Admin Settings</h2>
-                <mat-divider></mat-divider>
-                <h3>Users</h3>
-                <mat-form-field class="example-form-field">
-                    <input matInput type="text" placeholder="Search user" [(ngModel)]="value" />
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                </mat-form-field>
-            </mat-tab>
-        </mat-tab-group>
+
+                </mat-tab>
+
+                <mat-tab label="settings" *ngIf="tournament.admin == authUser.uid">
+                    <ng-template mat-tab-label>
+                        <mat-icon>settings</mat-icon>
+                    </ng-template>
+                    <div class="content">
+                        <h2>Admin Settings</h2>
+                        <mat-divider></mat-divider>
+                        <h3>Users</h3>
+                        <mat-form-field class="example-form-field">
+                            <input matInput type="text" placeholder="Search user" [(ngModel)]="value" (ngModelChange)="getUsersByName()" />
+                            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <mat-divider></mat-divider>
+                        <mat-list *ngFor="let user of users$ | async">
+                            <mat-list-item *ngIf="user.uid != authUser.uid">
+                                <div class="item-container">
+                                    <div class="photo">
+                                        <img [src]="user.photoURL" width="32" height="32">
+                                    </div>
+                                    <div class="name">
+                                        {{user.displayName}}
+                                    </div>
+                                    <div class="invite">
+                                        <button mat-mini-fab color="primary" (click)="inviteUser(tournamentID,user.uid)">
+                                            <mat-icon>add</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </mat-list>
+                        <!-- <mat-divider></mat-divider> -->
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </span>
     </span>
     <ng-template #Loading>
         <mat-spinner></mat-spinner>

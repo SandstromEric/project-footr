@@ -13,6 +13,7 @@ interface User {
     email: string;
     photoURL?: string;
     displayName?: string;
+    queryName?: string;
 }
 
 
@@ -60,6 +61,7 @@ export class AuthService {
             uid: user.uid,
             email: user.email,
             displayName: user.displayName,
+            queryName: user.displayName.toLowerCase(),
             photoURL: user.photoURL
         }
 

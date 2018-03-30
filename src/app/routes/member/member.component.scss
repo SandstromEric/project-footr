@@ -4,13 +4,13 @@ header {
 		display: flex;
 		padding: 0 10px;
 		.logo {
-			color: #fff;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			h2 {
 				margin: 0;
 				letter-spacing: 3px;
+				color: #fff;
 			}
 		}
 		.navigation {
@@ -47,7 +47,7 @@ header {
 
 .site-container {
 	max-width: 1280px;
-	margin: 60px auto;
+	margin: 0 auto;
 	padding: 10px;
 	box-sizing: border-box; 
 }

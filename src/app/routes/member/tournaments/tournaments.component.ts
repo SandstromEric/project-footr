@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { TournamentService } from '../../../shared/tournament.service';
 import { AuthService } from '../../../auth/auth.service';
+import { Observable } from '@firebase/util';
 
 @Component({
     selector: 'app-tournaments',
@@ -8,16 +9,13 @@ import { AuthService } from '../../../auth/auth.service';
     styleUrls: ['./tournaments.component.scss']
 })
 export class TournamentsComponent implements OnInit {
-    loading = true;
-    myTournaments;
+    myTournaments$;
     constructor(public tournamentService: TournamentService, public auth: AuthService) { 
 
     }
 
     ngOnInit() {
-        this.tournamentService.myTournaments().subscribe(data => {
-            
-        });
+        this.myTournaments$ = this.tournamentService.myTournaments();
     }
 
 }
