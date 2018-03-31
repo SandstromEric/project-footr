@@ -36,11 +36,6 @@ export class TournamentDetailComponent implements OnInit {
         this.users$ = this.tournamentService.getUsersByName(this.value);
     }
 
-    inviteUser(tournamentID: string, userID: string) {
-        
-        this.openMessage(this.tournamentService.inviteUser(tournamentID, userID));
-    }
-
     openMessage(message) {
         this.snackBar.open(message,'test',{
             duration: 3000,

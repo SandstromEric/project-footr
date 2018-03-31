@@ -8,15 +8,16 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/combineLatest';
 
 export interface User {
-    uid: string,
-    displayName?: string,
+    uid: string;
+    displayName?: string;
+    photoURL?: string;
+
 }
 @Injectable()
 export class TournamentService {
     user: User = {
         uid: this.afAuth.auth.currentUser.uid
     };
-    myTournaments$;
     colRef: AngularFirestoreCollection<any>;
     docRef: AngularFirestoreDocument<any>;
 
@@ -66,32 +67,37 @@ export class TournamentService {
         let startcode = strSearch;
         let endcode = strFrontCode + String.fromCharCode(strEndCode.charCodeAt(0) + 1);
 
-        this.colRef = this.afs.collection('users', ref => ref.where('queryName', '>=', startcode).where('queryName', '<', endcode));
+        this.colRef = this.afs.collection('users', ref =>
+            ref.where('queryName', '>=', startcode)
+                .where('queryName', '<', endcode)
+        )
         return this.colRef.valueChanges();
     }
 
-    inviteUser(tournamentID: string, userID: string): any {
-        let exists: boolean;
-        this.docRef = this.afs.collection('users').doc(userID).collection('tournamentInvites').doc(tournamentID);
+    inviteUser(tournamentID: string, user: User) {
+        this.docRef = this.afs.collection('users').doc(user.uid).collection('tournamentInvites').doc(tournamentID);
 
         this.docRef.update({})
             .then(doc => {
-                exists = true;
             }).catch(err => {
                 console.log('doc created')
                 this.docRef.set({
                     tid: tournamentID
                 });
-                exists = false;
+                this.docRef = this.afs.collection('tournaments').doc(tournamentID).collection('invited').doc(user.uid)
+                this.docRef.set({
+                    uid: user.uid,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
+                })
             });
-        return setTimeout(()=> {
-            if(exists) {
-                return 'User already invited';
-            } else {
-                return 'User invited';
-            }
-        }, 1000)
-        
+
+
+    }
+
+    getInvitedUsers(tournamentID: string): Observable<any> {
+        this.colRef = this.afs.collection('tournaments').doc(tournamentID).collection('invited');
+        return this.colRef.valueChanges();
     }
 
     invitesPending(): Observable<any> {

@@ -1,0 +1,35 @@
+<div class="example-container mat-elevation-z1">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="photo">
+            <mat-header-cell *matHeaderCellDef>Photo</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <img [src]="row.photoURL" width="32" height="32" alt="">
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.displayName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button *ngIf="userDataType === 'search'" mat-icon-button color="primary" (click)="inviteUser(row)">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+                <button *ngIf="userDataType === 'invited'" mat-icon-button color="warn" (click)="inviteUser(row)">
+                    <mat-icon>remove_circle</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

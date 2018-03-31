@@ -1,0 +1,13 @@
+mat-header-cell:not(.mat-column-name) {
+	flex: none;
+	padding: 0 10px;
+}
+
+mat-cell:not(.mat-column-name) {
+	flex: none;
+	padding: 0 10px;
+
+	img {
+		border-radius: 50%;
+	}
+}

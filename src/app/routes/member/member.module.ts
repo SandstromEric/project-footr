@@ -14,6 +14,7 @@ import { TournamentsComponent } from './tournaments/tournaments.component';
 import { TournamentCreateComponent } from './tournaments/tournament-create/tournament-create.component';
 import { TournamentCreateDialogComponent } from './tournaments/tournament-create/tournament-create-dialog/tournament-create-dialog.component';
 import { TournamentDetailComponent, TournamentMessage } from './tournaments/tournament-detail/tournament-detail.component';
+import { UsersTableComponent } from './shared-components/users-table/users-table.component';
 
 const memberRoutes: Routes = [
     {
@@ -38,7 +39,7 @@ const memberRoutes: Routes = [
         RouterModule
     ],
     declarations: [
-        MemberComponent, DashboardComponent, TournamentsComponent, TournamentCreateComponent, TournamentCreateDialogComponent, TournamentDetailComponent, TournamentMessage
+        MemberComponent, DashboardComponent, TournamentsComponent, TournamentCreateComponent, TournamentCreateDialogComponent, TournamentDetailComponent, TournamentMessage, UsersTableComponent
     ],
     entryComponents: [TournamentCreateDialogComponent, TournamentMessage],
     providers: [TournamentService]
