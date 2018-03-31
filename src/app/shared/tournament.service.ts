@@ -84,14 +84,13 @@ export class TournamentService {
                 this.docRef.set({
                     tid: tournamentID
                 });
-                this.docRef = this.afs.collection('tournaments').doc(tournamentID).collection('invited').doc(user.uid)
-                this.docRef.set({
-                    uid: user.uid,
-                    displayName: user.displayName,
-                    photoURL: user.photoURL
-                })
-            });
 
+            });
+        this.afs.collection('tournaments').doc(tournamentID).collection('invited').doc(user.uid).set({
+            uid: user.uid,
+            displayName: user.displayName,
+            photoURL: user.photoURL
+        })
 
     }
 
