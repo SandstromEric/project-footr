@@ -20,7 +20,7 @@
                 <button *ngIf="userDataType === 'search'" mat-icon-button color="primary" (click)="inviteUser(row)">
                     <mat-icon>add_circle</mat-icon>
                 </button>
-                <button *ngIf="userDataType === 'invited'" mat-icon-button color="warn" (click)="inviteUser(row)">
+                <button *ngIf="userDataType === 'invited'" mat-icon-button color="warn" (click)="removedInvitedUser(row)">
                     <mat-icon>remove_circle</mat-icon>
                 </button>
             </mat-cell>

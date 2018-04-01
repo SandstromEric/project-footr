@@ -1,0 +1,15 @@
+.user {
+	> div {
+		display: flex;
+		.avatar {
+	
+			img {
+				width: 32px;
+				border-radius: 50%;
+			}
+		}
+		.name {
+			color: #fff;
+		}
+	}
+}

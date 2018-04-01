@@ -11,10 +11,20 @@ export interface User {
     uid: string;
     displayName?: string;
     photoURL?: string;
-
 }
+
+export interface Tournament {
+    admin: string;
+    adminJoin: boolean;
+    name: string;
+    private: boolean;
+    league: string;
+    players: number;
+}
+
 @Injectable()
 export class TournamentService {
+    currentUser = this.afAuth.auth.currentUser;
     user: User = {
         uid: this.afAuth.auth.currentUser.uid
     };
@@ -29,13 +39,15 @@ export class TournamentService {
     }
 
     createTournament(tournament) {
-        tournament.admin = this.user.uid;
+        tournament.admin = this.currentUser.uid;
         this.colRef = this.afs.collection('tournaments');
         this.colRef.add(tournament).then(doc => {
             if (tournament.adminJoin == true) {
                 doc.collection(`users`).doc(tournament.admin).set({
-                    name: this.user.displayName,
-                    uid: this.user.uid,
+                    uid: this.currentUser.uid,
+                    displayName: this.currentUser.displayName,
+                    photoURL: this.currentUser.photoURL,
+                    email: this.currentUser.email,
                     score: 0
                 });
             }
@@ -44,7 +56,7 @@ export class TournamentService {
     }
 
     myTournaments(): Observable<any> {
-        return this.afs.collection('tournaments', ref => ref.where('admin', '==', this.user.uid)).snapshotChanges().map(actions => {
+        return this.afs.collection('tournaments', ref => ref.where('admin', '==', this.currentUser.uid)).snapshotChanges().map(actions => {
             return actions.map(action => {
                 const data = action.payload.doc.data();
                 const id = action.payload.doc.id;
@@ -55,7 +67,11 @@ export class TournamentService {
 
     getTournament(id): Observable<any> {
         this.docRef = this.afs.doc(`tournaments/${id}`);
-        return this.docRef.valueChanges();
+        return this.docRef.snapshotChanges().map(action => {
+            const data = action.payload.data();
+            const id = action.payload.id;
+            return { id, ...data };
+        });
     }
 
     getUsersByName(name: string): Observable<any> {
@@ -74,18 +90,11 @@ export class TournamentService {
         return this.colRef.valueChanges();
     }
 
-    inviteUser(tournamentID: string, user: User) {
-        this.docRef = this.afs.collection('users').doc(user.uid).collection('tournamentInvites').doc(tournamentID);
+    inviteUser(tournamentID: string, user: User): void {
+        this.afs.collection('users').doc(user.uid).collection('tournamentInvites').doc(tournamentID).set({
+            tid: tournamentID
+        });;
 
-        this.docRef.update({})
-            .then(doc => {
-            }).catch(err => {
-                console.log('doc created')
-                this.docRef.set({
-                    tid: tournamentID
-                });
-
-            });
         this.afs.collection('tournaments').doc(tournamentID).collection('invited').doc(user.uid).set({
             uid: user.uid,
             displayName: user.displayName,
@@ -94,14 +103,30 @@ export class TournamentService {
 
     }
 
+    removeInvitedUser(tournamentID: string, user: User): void {
+        this.afs.collection('tournaments').doc(tournamentID).collection('invited').doc(user.uid).delete();
+        this.afs.collection('users').doc(user.uid).collection('tournamentInvites').doc(tournamentID).delete();
+    }
+
     getInvitedUsers(tournamentID: string): Observable<any> {
         this.colRef = this.afs.collection('tournaments').doc(tournamentID).collection('invited');
         return this.colRef.valueChanges();
     }
 
     invitesPending(): Observable<any> {
-        this.colRef = this.afs.collection('users').doc(this.user.uid).collection('tournamentInvites');
+        this.colRef = this.afs.collection('users').doc(this.currentUser.uid).collection('tournamentInvites');
         return this.colRef.valueChanges();
+    }
+
+    acceptInvite(tournamentID: string) {
+        this.afs.collection('users').doc(this.currentUser.uid).collection('tournamentInvites').doc(tournamentID).delete();
+        this.afs.collection('tournaments').doc(tournamentID).collection('users').doc(this.currentUser.uid).set({
+            uid: this.currentUser.uid,
+            displayName: this.currentUser.displayName,
+            photoURL: this.currentUser.photoURL,
+            email: this.currentUser.email,
+            score: 0
+        });
     }
 
     /* alreadyInvited(tournamentID: string, userID: string): Observable<any> {

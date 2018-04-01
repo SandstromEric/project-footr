@@ -1,0 +1,28 @@
+header {
+	background: #36454f;
+	.container {
+		display: flex;
+		padding: 0 10px;
+		.logo {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			h2 {
+				margin: 0;
+				letter-spacing: 3px;
+				color: #fff;
+			}
+		}
+		app-navigation {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		app-user {
+			justify-content: center;
+			align-items: center;
+			display: flex;
+		}
+	}
+}

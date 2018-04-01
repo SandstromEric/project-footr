@@ -71,4 +71,8 @@ export class UsersTableComponent implements OnInit, AfterViewInit, OnChanges {
     inviteUser(user: User): void {
         this.tournamentService.inviteUser(this.tournamentID, user);
     }
+
+    removedInvitedUser(user: User) {
+        this.tournamentService.removeInvitedUser(this.tournamentID, user);
+    }
 }

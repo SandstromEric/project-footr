@@ -10,16 +10,22 @@
                             <mat-icon class="private-indicator">{{tournament.private ? 'lock': 'lock_open'}}</mat-icon>
                             <span class="tournament-name">{{tournament.name}}</span>
                             <div class="tournament-meta">
-                                <mat-chip-list selectable="false">
+                                <!-- <mat-chip-list selectable="false">
                                     <mat-chip selected="true" color="primary">Players: {{tournament.players}}</mat-chip>
                                     <mat-chip selected="true" color="accent">League: {{tournament.league}}</mat-chip>
-                                </mat-chip-list>
+                                </mat-chip-list> -->
+                                <small class="mat-caption">
+                                    Players: {{tournament.players}}
+                                </small>
+                                <small class="mat-caption">
+                                    Players: {{tournament.league}}
+                                </small>
                                 <a mat-icon-button routerLink="{{tournament.id}}">
                                     <mat-icon>exit_to_app</mat-icon>
                                 </a>
                             </div>
 
-                            
+
                         </mat-list-item>
                         <mat-divider></mat-divider>
                     </span>
@@ -40,7 +46,42 @@
     <mat-card>
         <mat-card-title>Tournament Invites</mat-card-title>
         <mat-card-content>
-            You do not have any invites.
+            <div *ngIf="pendingInvites$; else loading">
+                <mat-list>
+                    <mat-divider></mat-divider>
+                    <span *ngFor="let invite of pendingInvites$">
+                        <mat-list-item>
+                            <mat-icon class="private-indicator">{{invite.private ? 'lock': 'lock_open'}}</mat-icon>
+                            <span class="tournament-name">{{invite.name}}</span>
+                            <div class="tournament-meta">
+                                <!-- <mat-chip-list selectable="false">
+                                        <mat-chip selected="true" color="primary">Players: {{tournament.players}}</mat-chip>
+                                        <mat-chip selected="true" color="accent">League: {{tournament.league}}</mat-chip>
+                                    </mat-chip-list> -->
+                                <small class="mat-caption">
+                                    Players: {{invite.players}}
+                                </small>
+                                <small class="mat-caption">
+                                    Players: {{invite.league}}
+                                </small>
+                                <button mat-icon-button color="warn" (click)="removeInvite(invite.id)">
+                                    <mat-icon>delete_forever</mat-icon>
+                                </button>
+                                <button mat-icon-button color="primary" (click)="acceptInvite(invite.id)">
+                                    <mat-icon>check_circle</mat-icon>
+                                </button>
+                            </div>
+
+
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </span>
+                </mat-list>
+                <span *ngIf="pendingInvites$.length == 0">You do not participate in any tournaments</span>
+            </div>
+            <ng-template #loading>
+                <mat-spinner></mat-spinner>
+            </ng-template>
         </mat-card-content>
     </mat-card>
 </div>

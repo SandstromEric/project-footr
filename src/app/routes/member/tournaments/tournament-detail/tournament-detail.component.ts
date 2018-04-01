@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class TournamentDetailComponent implements OnInit {
 
-    value: string = "e";
+    value: string = "";
     users$: any = this.tournamentService.getUsersByName(this.value);
     tournament$: any;
     tournamentID: string;

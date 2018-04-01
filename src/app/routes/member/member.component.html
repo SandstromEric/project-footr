@@ -1,45 +1,5 @@
-<header>
-    <div class="container">
-        <div class="logo">
-            <h2>footr</h2>
-        </div>
-        <div class="navigation">
-            <!-- <a routerLink="dashboard">test</a> -->
-            <nav mat-tab-nav-bar>
-                <a mat-tab-link *ngFor="let link of navLinks" routerLink="./{{link.path}}" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
-                    {{link.label}}
-                </a>
-            </nav>
-        </div>
-        <div class="user">
-            <!-- <button mat-raised-button (click)="signOut()">SignOut</button>   -->
-            <div *ngIf="user">
-                <button mat-button class="name" [matMenuTriggerFor]="userMenu">
-                    {{user.displayName}}
-                    <i class="material-icons">keyboard_arrow_down</i>
-                </button>
-                <mat-menu #userMenu="matMenu">
-                    <button mat-menu-item>
-                        <mat-icon>account_box</mat-icon>
-                        <span>My profile</span>
-                    </button>
-                    <button mat-menu-item>
-                        <mat-icon>settings</mat-icon>
-                        <span>Settings</span>
-                    </button>
-                    <button mat-menu-item (click)="signOut()">
-                        <mat-icon>exit_to_app</mat-icon>
-                        <span>Sign out</span>
-                    </button>
-                </mat-menu>
-                <div class="avatar">
-                    <img [src]="user.photoURL" alt="user-avatar">
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
 
+<app-header></app-header>
 <div class="site-container">
     <router-outlet></router-outlet>
 </div>

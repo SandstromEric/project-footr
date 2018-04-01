@@ -7,20 +7,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
     styleUrls: ['./member.component.scss']
 })
 export class MemberComponent implements OnInit {
-    user;
-    navLinks = [
-        {label: 'Dashboard', path: 'dashboard'},
-        {label: 'Tournaments', path: 'tournaments'}
-    ];
-    constructor(private authService: AuthService, private afAuth: AngularFireAuth) { }
+
+    constructor() { }
 
     ngOnInit() {
-        this.authService.user.subscribe(user => {
-            this.user = user;
-        })
+        
     }
 
-    signOut() {
-        this.authService.signOut();
-    }
+    
 }

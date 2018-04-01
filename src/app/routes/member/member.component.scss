@@ -1,49 +1,4 @@
-header {
-	background: #36454f;
-	.container {
-		display: flex;
-		padding: 0 10px;
-		.logo {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			h2 {
-				margin: 0;
-				letter-spacing: 3px;
-				color: #fff;
-			}
-		}
-		.navigation {
-			flex: 1;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			
-			.mat-tab-label, .mat-tab-link {
-				color: #fff;
-			}
-		}
-		.user {
-			justify-content: center;
-			align-items: center;
-			display: flex;
-			> div {
-				display: flex;
-				.avatar {
 
-					img {
-						width: 32px;
-						border-radius: 50%;
-					}
-				}
-				.name {
-					color: #fff;
-				}
-			}
-			
-		}
-	}
-}
 
 .site-container {
 	max-width: 1280px;
