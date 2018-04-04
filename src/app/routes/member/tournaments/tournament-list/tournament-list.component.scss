@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	mat-card {
+		flex: 0 1 550px;
+
+		&:first-child {
+			margin-right: 10px;
+		}
+	}
+}
+
+.tournament-meta {
+	position: absolute;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+mat-list {
+	span {
+		text-transform: capitalize;
+		
+	}
+	.tournament-name {
+		margin-left: 10px;
+	}
+}
+
+.private-indicator {
+	position: absolute;
+	left: 0;
+}
+small {
+	background: #444;
+	color: #fafafa;
+	padding: 2px 4px;
+	margin-left: 4px;
+	border-radius: 2px;
+}

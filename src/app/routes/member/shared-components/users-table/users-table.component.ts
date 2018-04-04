@@ -3,6 +3,8 @@ import { MatTableDataSource, MatPaginator, MatSort, MatPaginatorIntl } from '@an
 import { User, TournamentService } from '../../../../shared/tournament.service';
 import { AuthService } from '../../../../auth/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DocPipe } from '../../../../shared/doc.pipe';
 
 export interface UserData {
     displayName: string;
@@ -14,24 +16,27 @@ export interface UserData {
 @Component({
     selector: 'app-users-table',
     templateUrl: './users-table.component.html',
-    styleUrls: ['./users-table.component.scss']
+    styleUrls: ['./users-table.component.scss'],
+    providers: [DocPipe]
 })
 export class UsersTableComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() data: string;
     @Input() tournamentID: string;
     @Input() userDataType: string;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
     users$: UserData[] = [];
+    invites$;
     displayedColumns = ['photo', 'name', 'action'];
     dataSource: MatTableDataSource<User>;
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
 
     constructor(
         private tournamentService: TournamentService,
         private auth: AuthService,
         private afAuth: AngularFireAuth,
         private matPag: MatPaginatorIntl,
+        private doc: DocPipe,
     ) { }
 
     ngOnInit() {
@@ -40,24 +45,24 @@ export class UsersTableComponent implements OnInit, AfterViewInit, OnChanges {
 
     ngAfterViewInit() {
         if (this.userDataType === 'invited') {
-            this.tournamentService.getInvitedUsers(this.tournamentID).subscribe(data => {
-                this.dataSource = new MatTableDataSource(data);
+            this.tournamentService.getInvitedUsers(this.tournamentID).subscribe(users => {
+                this.dataSource = new MatTableDataSource(users);
                 this.dataSource.paginator = this.paginator;
-            });
+            })
         }
     }
 
     ngOnChanges(changes: SimpleChanges) {
         //this.getUsersByName(changes.data.currentValue);
         if (this.userDataType === 'search') {
-            this.tournamentService.getUsersByName(this.data.toLowerCase()).subscribe(data => {
+            this.tournamentService.getUsersByName(this.data.toLowerCase()).subscribe(users => {
                 //exclude logged in user;
-                data.forEach((item, index) => {
+                users.forEach((item, index) => {
                     if (item.uid == this.afAuth.auth.currentUser.uid) {
-                        data.splice(index, 1);
+                        users.splice(index, 1);
                     }
                 });
-                this.dataSource = new MatTableDataSource(data);
+                this.dataSource = new MatTableDataSource(users);
                 this.dataSource.paginator = this.paginator;
             });
         }

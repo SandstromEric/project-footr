@@ -23,7 +23,9 @@ export class TournamentDetailComponent implements OnInit {
         private tournamentService: TournamentService,
         public auth: AuthService,
         private snackBar: MatSnackBar
-    ) { }
+    ) {
+        console.log('test')
+     }
 
     ngOnInit() {
         this.route.params.subscribe(params => {

@@ -32,4 +32,10 @@
     </mat-table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+    <!-- <div *ngIf="invites$ | async as invites">
+        <div *ngFor="let invite of invites">
+            {{(invite.user | doc | async)?}}
+        </div>
+    </div> -->
 </div>

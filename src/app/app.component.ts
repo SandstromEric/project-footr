@@ -11,20 +11,20 @@ import * as firebase from 'firebase/app';
 })
 export class AppComponent {
     
-    currentRoute = localStorage.getItem('currentRoute');
+    /* currentRoute = localStorage.getItem('currentRoute'); */
 
     constructor(private afAuth: AngularFireAuth, private router: Router) {
-        router.events.subscribe((event) => {
+        /* router.events.subscribe((event) => {
             if(event instanceof NavigationEnd) {
                 localStorage.setItem('currentRoute', event['url']);
             }
-        })
+        }) */
     }
     ngOnInit() {
-        this.afAuth.authState.subscribe(user => {
+        /* this.afAuth.authState.subscribe(user => {
             if (user) {
                 this.router.navigate([this.currentRoute]);
             }
-        });
+        }); */
     }
 }
