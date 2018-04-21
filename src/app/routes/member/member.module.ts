@@ -15,6 +15,7 @@ import { UserComponent } from './header/user/user.component';
 import { UserProfileComponent } from './header/user/user-profile/user-profile.component';
 import { UserSettingsComponent } from './header/user/user-settings/user-settings.component';
 import { DocPipe } from '../../shared/doc.pipe';
+import { FirestoreService } from '../../shared/firestore.service';
 
 const memberRoutes: Routes = [
     {
@@ -47,6 +48,6 @@ const memberRoutes: Routes = [
         UserSettingsComponent, 
         DocPipe
     ],
-    providers: []
+    providers: [FirestoreService]
 })
 export class MemberModule { }

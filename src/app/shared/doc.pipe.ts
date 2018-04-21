@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TournamentService } from './tournament.service';
 import { Observable } from 'rxjs/Observable';
+import { FirestoreService } from './firestore.service';
 @Pipe({
     name: 'doc'
 })
 export class DocPipe implements PipeTransform {
-    constructor(private tournamentService: TournamentService) {}
+    constructor(private db: FirestoreService) {}
     transform(value: any): Observable<any> {
-        return this.tournamentService.doc$(value.path);
+        return this.db.doc$(value.path);
     }
 }

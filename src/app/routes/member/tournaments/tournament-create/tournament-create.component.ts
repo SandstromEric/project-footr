@@ -42,6 +42,11 @@ export class TournamentCreateComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             if(result) {
+                let league = result.league.split('_');
+                result.league = {
+                    id: Number(league[0]),
+                    caption: league[1]
+                }
                 this.tournamentService.createTournament(result);
             }
         });

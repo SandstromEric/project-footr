@@ -1,0 +1,58 @@
+mat-panel-title {
+	display: flex;
+	
+	div {
+		flex: 2;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		
+		&:nth-child(2) {
+			text-align: center;
+			justify-content: center;
+			flex: 1;
+		}
+		&:nth-child(3) {
+			text-align: right;
+			justify-content: flex-end;
+		}
+	}
+}
+mat-panel-description {
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.home, .away {
+	
+	.image {
+		width: 32px;
+		height: 32px;
+		display: inline-block;
+		background-size: cover;
+		border-radius: 50%;
+		background-position: 50% 50%;
+		margin: 5px;
+		border: 1px solid #aaa;
+		&.not-found {
+			border: 1px solid #aaa;
+			position: relative;
+			span {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translateX(-50%) translateY(-50%);
+			}
+		}
+	}
+}
+
+.prediction {
+	background: limegreen;
+	padding: 5px 10px;
+	color: #fff;
+	width: 50px;
+	border-radius: 25px;
+	text-align: center;
+	margin-right: 10px;
+}

@@ -5,14 +5,14 @@
             <mat-divider></mat-divider>
             <mat-tab-group color="accent">
                 <mat-tab label="Matches">
-
-                    shared-component
+                    <app-tournament-matches [tournamentID]="tournamentID" [leagueID]="tournament.league.id"></app-tournament-matches>
+                </mat-tab>
+                <mat-tab label="Results">
+                    Not yet implemented
                 </mat-tab>
                 <mat-tab label="Scoreboard">
-
-
+                    <app-users-table [data]="value" [tournamentID]="tournamentID" userDataType="scoreboard"></app-users-table>
                 </mat-tab>
-
                 <mat-tab label="settings" *ngIf="tournament.admin == authUser.uid">
                     <ng-template mat-tab-label>
                         <mat-icon>settings</mat-icon>

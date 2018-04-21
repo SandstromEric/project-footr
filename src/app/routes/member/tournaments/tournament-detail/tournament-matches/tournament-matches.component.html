@@ -1,0 +1,11 @@
+<span *ngIf="fixtures$ | async as fixtures; else loading">
+    <mat-accordion>
+        <span *ngFor="let match of fixtures; let i = index; trackBy: trackArray">
+            <app-match-prediction-form (getPanel)="getPanel($event)" [activePanel]="activePanel" [panelNumber]="i" [match]="match" [fixtureID]="match.fixtureID" [tournamentID]="tournamentID"></app-match-prediction-form>
+        </span>
+    </mat-accordion>
+</span>
+
+<ng-template #loading>
+    <mat-spinner></mat-spinner>
+</ng-template>

@@ -1,0 +1,42 @@
+<mat-expansion-panel [expanded]="activePanel === panelNumber" (opened)="setActivePanel(panelNumber)">
+    <mat-expansion-panel-header style="display: flex">
+        <mat-panel-title style="flex: 2;">
+            <div class="home">
+                <span class="image" *ngIf="match.homeTeam.crestUrl !== null; else noImage" [ngStyle]="{'background-image': 'url('+match.homeTeam.crestUrl+')'}"></span>
+                <span>{{match.homeTeam.name}}</span>
+            </div>
+            <div>VS</div>
+            <div class="away">
+                <span>{{match.awayTeam.name}}</span>
+                <span class="image" *ngIf="match.awayTeam.crestUrl !== null; else noImage" [ngStyle]="{'background-image': 'url('+match.awayTeam.crestUrl+')'}"></span>
+            </div>
+        </mat-panel-title>
+        <mat-panel-description style="flex: 3;">
+            <span *ngIf="prediction != null" class="prediction">
+                {{prediction.scores.home}} - {{prediction.scores.away}}
+            </span>
+            <span class="kickoff-date">
+                {{match.date | date:'MMM d, y, h:mm a'}}
+            </span>
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+        <input matInput [(ngModel)]="homeScore" type="number" placeholder="Home Score">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput [(ngModel)]="awayScore" type="number" placeholder="Away Score">
+    </mat-form-field>
+
+    <mat-action-row>
+        <button mat-raised-button color="primary" (click)="lockPrediction()">Lock Prediction</button>
+    </mat-action-row>
+</mat-expansion-panel>
+
+<ng-template #noImage>
+    <span class="image not-found">
+        <span>
+            ?
+        </span>
+    </span>
+</ng-template>

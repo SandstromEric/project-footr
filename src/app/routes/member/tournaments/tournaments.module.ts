@@ -15,12 +15,17 @@ import { TournamentCreateComponent } from './tournament-create/tournament-create
 import { TournamentCreateDialogComponent } from './tournament-create/tournament-create-dialog/tournament-create-dialog.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { TournamentListComponent } from './tournament-list/tournament-list.component';
+import { FootballDataService } from '../../../shared/football-data.service';
+import { TournamentMatchesComponent } from './tournament-detail/tournament-matches/tournament-matches.component';
+import { TournamentFinderComponent } from './tournament-finder/tournament-finder.component';
+import { MatchPredictionFormComponent } from './tournament-detail/tournament-matches/match-prediction-form/match-prediction-form.component';
 
 
 const tournamentsRoutes: Routes = [
   {
       path: '', component: TournamentsComponent, children: [
           { path: '', component: TournamentListComponent},
+          { path: 'finder', component: TournamentFinderComponent },
           { path: ':id', component: TournamentDetailComponent },
       ]
   }
@@ -42,8 +47,11 @@ const tournamentsRoutes: Routes = [
     TournamentCreateComponent,
     TournamentCreateDialogComponent,
     TournamentListComponent,
+    TournamentMatchesComponent,
+    TournamentFinderComponent,
+    MatchPredictionFormComponent,
   ],
   entryComponents: [TournamentCreateDialogComponent],
-  providers: [TournamentService]
+  providers: [TournamentService, FootballDataService]
 })
 export class TournamentsModule { }

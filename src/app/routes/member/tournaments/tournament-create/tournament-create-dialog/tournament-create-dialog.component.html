@@ -1,6 +1,5 @@
 <h2 mat-dialog-title>Create Tournament</h2>
-<form (ngSubmit)="save()">
-
+<form (ngSubmit)="save()" *ngIf="leagues$ | async as leagues">
     <mat-dialog-content [formGroup]="form">
 
         <mat-form-field>
@@ -16,7 +15,7 @@
         </mat-form-field>
         <mat-form-field>
             <mat-select [(ngModel)]="league" formControlName="league" placeholder="League" required>
-                <mat-option value="123">Option</mat-option>
+                <mat-option *ngFor="let league of leagues" [value]="league.id+'_'+league.caption">{{league.caption}}</mat-option>
             </mat-select>
             <mat-error>
                 <span *ngIf="league.length == 0">

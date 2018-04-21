@@ -27,9 +27,9 @@ export class UsersTableComponent implements OnInit, AfterViewInit, OnChanges {
     @ViewChild(MatSort) sort: MatSort;
     users$: UserData[] = [];
     invites$;
-    displayedColumns = ['photo', 'name', 'action'];
+    displayedColumns;
+    columnDefs;
     dataSource: MatTableDataSource<User>;
-
 
     constructor(
         private tournamentService: TournamentService,
@@ -37,10 +37,27 @@ export class UsersTableComponent implements OnInit, AfterViewInit, OnChanges {
         private afAuth: AngularFireAuth,
         private matPag: MatPaginatorIntl,
         private doc: DocPipe,
-    ) { }
+    ) { 
+        
+    }
 
     ngOnInit() {
         this.matPag.itemsPerPageLabel = 'Users per page: '
+        if(this.userDataType === 'invited' || this.userDataType === 'search') {
+            this.columnDefs = [
+                {columnDef: 'photo', headName: 'Photo', cell: (row) => `${row.photoURL}`},
+                {columnDef: 'name', headName: 'Name', cell: (row) => `${row.displayName}`},
+                {columnDef: 'action', headName: '', cell: (row) => `${row}`},
+            ];
+            this.displayedColumns = ['photo', 'name','action'];
+        } else if(this.userDataType === 'scoreboard'){
+            this.columnDefs = [
+                {columnDef: 'photo', headName: 'Photo', cell: (row) => `${row.photoURL}`},
+                {columnDef: 'name', headName: 'Name', cell: (row) => `${row.displayName}`},
+                {columnDef: 'score', headName: 'Score', cell: (row) => `${row.score}`},
+            ];
+            this.displayedColumns = ['photo', 'name', 'score'];
+        }
     }
 
     ngAfterViewInit() {
@@ -48,8 +65,14 @@ export class UsersTableComponent implements OnInit, AfterViewInit, OnChanges {
             this.tournamentService.getInvitedUsers(this.tournamentID).subscribe(users => {
                 this.dataSource = new MatTableDataSource(users);
                 this.dataSource.paginator = this.paginator;
-            })
+            });
+        } else if(this.userDataType === 'scoreboard') {
+            this.tournamentService.getPlayers(this.tournamentID).subscribe(users => {
+                this.dataSource = new MatTableDataSource(users);
+                this.dataSource.paginator = this.paginator;
+            });
         }
+
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -73,7 +96,7 @@ export class UsersTableComponent implements OnInit, AfterViewInit, OnChanges {
         this.tournamentService.getUsersByName(data)
     }
 
-    inviteUser(user: User): void {
+    inviteUser(user: User) {
         this.tournamentService.inviteUser(this.tournamentID, user);
     }
 

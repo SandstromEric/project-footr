@@ -18,7 +18,7 @@
                                     Players: {{tournament.players}}
                                 </small>
                                 <small class="mat-caption">
-                                    League: {{tournament.league}}
+                                    League: {{tournament.league.caption}}
                                 </small>
                                 <a mat-icon-button routerLink="{{tournament.id}}">
                                     <mat-icon>exit_to_app</mat-icon>
@@ -36,7 +36,7 @@
         </mat-card-content>
         <mat-card-actions>
             <app-tournament-create></app-tournament-create>
-            <button mat-raised-button color="accent" disabled>
+            <button mat-raised-button color="accent" routerLink="finder">
                 <span>Find</span>
             </button>
         </mat-card-actions>
