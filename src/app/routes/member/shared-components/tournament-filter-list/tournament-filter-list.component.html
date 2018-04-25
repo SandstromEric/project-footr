@@ -1,0 +1,47 @@
+<mat-table #table [dataSource]="dataSource" matPaginator>
+
+    <ng-container matColumnDef="privacy">
+        <mat-header-cell *matHeaderCellDef> Privacy </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <mat-icon>{{row.private ? 'lock': 'lock_open'}}</mat-icon>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="league">
+        <mat-header-cell *matHeaderCellDef> League </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.league.caption }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="players">
+        <mat-header-cell *matHeaderCellDef> Players </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.players }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="join">
+        <mat-header-cell *matHeaderCellDef>Joinable</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <span *ngIf="row.private">
+                <button mat-icon-button disabled>
+                    <mat-icon>send</mat-icon>
+                </button>
+            </span>
+            <span *ngIf="!row.private">
+                <button mat-icon-button (click)="joinTournament(row.id)">
+                    <mat-icon>add_circle</mat-icon>
+                </button>
+            </span>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="animate"></mat-row>
+</mat-table>
+
+<mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>

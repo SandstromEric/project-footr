@@ -3,6 +3,14 @@ header {
 	.container {
 		display: flex;
 		padding: 0 10px;
+		div {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			mat-icon {
+				color: #fff;
+			}
+		}
 		.logo {
 			display: flex;
 			justify-content: center;

@@ -16,7 +16,6 @@ import { UserProfileComponent } from './header/user/user-profile/user-profile.co
 import { UserSettingsComponent } from './header/user/user-settings/user-settings.component';
 import { DocPipe } from '../../shared/doc.pipe';
 import { FirestoreService } from '../../shared/firestore.service';
-
 const memberRoutes: Routes = [
     {
         path: '', component: MemberComponent, children: [

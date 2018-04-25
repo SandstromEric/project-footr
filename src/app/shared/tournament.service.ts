@@ -72,8 +72,8 @@ export class TournamentService {
         return this.db.doc$(`tournaments/${id}`);
     }
 
-    findTournaments(): Observable<any> {
-        return this.db.colWithIds$('tournaments');
+    findTournaments(privacy: boolean, league: number, players: Array<number> ): Observable<any> {
+        return this.db.colWithIds$('tournaments', ref => ref.where('private', '==', privacy).where('league.id', '==', league).where('players', '>=', players[0]).where('players', '<=', players[1]));
     }
 
     getUsersByName(name: string): Observable<any[]> {
@@ -115,7 +115,10 @@ export class TournamentService {
 
         this.db.update(`tournaments/${tournamentID}`, userKeys);
         this.db.delete(`tournaments/${tournamentID}/invites/${this.user.uid}`);
-        this.db.set(`tournaments/${tournamentID}/users/${this.user.uid}`, this.user);
+        this.db.set(`tournaments/${tournamentID}/users/${this.user.uid}`, {
+            ...this.user,
+            score: 0
+        });
     }
 
     removeInvite(tournamentID: string): void {

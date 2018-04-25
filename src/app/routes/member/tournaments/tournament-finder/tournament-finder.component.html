@@ -1,3 +1,45 @@
 <mat-card>
+	<mat-card-title>Tournament Finder</mat-card-title>
+	<mat-card-subtitle>Filters</mat-card-subtitle>
 
+	<div class="filters" *ngIf="leagues$ | async as leagues">
+		<div class="filter private">
+			<mat-checkbox [(ngModel)]="privacy">Private</mat-checkbox>
+		</div>
+		<div class="filter leagues">
+			<mat-form-field>
+				<mat-select [(ngModel)]="league" placeholder="League" required>
+					<mat-option *ngFor="let league of leagues" [value]="league.id">
+						{{league.caption}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div class="filter players">
+			<mat-form-field>
+				<mat-select [(ngModel)]="players" placeholder="Players" required>
+					<mat-option value="2-10">
+						2-10
+					</mat-option>
+					<mat-option value="11-20">
+						11-20
+					</mat-option>
+					<mat-option value="21-30">
+						21-30
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div class="filter stakes">
+			<mat-form-field>
+				<mat-select placeholder="Stakes" disabled>
+					<mat-option>
+						test
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+	</div>
+	<mat-divider></mat-divider>
+	<app-tournament-filter-list [players]="players" [league]="league" [privacy]="privacy"></app-tournament-filter-list>
 </mat-card>

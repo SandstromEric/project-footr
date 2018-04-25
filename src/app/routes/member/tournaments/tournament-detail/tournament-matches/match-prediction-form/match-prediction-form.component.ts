@@ -25,7 +25,7 @@ export class MatchPredictionFormComponent implements OnInit {
     ngOnInit() {
         this.tournamentService.getPrediction(this.tournamentID, this.fixtureID, this.userID).subscribe(data => {
             if(data != undefined) {
-                console.log(data)
+                //console.log(data)
                 this.prediction = data;
                 this.homeScore = data.scores.home;
                 this.awayScore = data.scores.away;

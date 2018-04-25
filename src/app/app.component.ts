@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
-import { Router, NavigationEnd } from '@angular/router'
+import { Router, NavigationEnd, Route, ActivatedRoute } from '@angular/router'
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -13,7 +13,7 @@ export class AppComponent {
     
     /* currentRoute = localStorage.getItem('currentRoute'); */
 
-    constructor(private afAuth: AngularFireAuth, private router: Router) {
+    constructor(private afAuth: AngularFireAuth, private router: Router, private activatedRoute: ActivatedRoute) {
         /* router.events.subscribe((event) => {
             if(event instanceof NavigationEnd) {
                 localStorage.setItem('currentRoute', event['url']);
@@ -23,7 +23,10 @@ export class AppComponent {
     ngOnInit() {
         /* this.afAuth.authState.subscribe(user => {
             if (user) {
-                this.router.navigate([this.currentRoute]);
+                if(this.router.url === '/guest') {
+                    console.log(this.router.url)
+                    this.router.navigate(['/member/dashboard'])
+                }
             }
         }); */
     }

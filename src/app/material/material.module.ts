@@ -20,6 +20,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatGridListModule } from '@angular/material/grid-list';
+
 @NgModule({
     imports: [],
     exports: [
@@ -43,7 +46,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatSidenavModule,
+        MatGridListModule
     ],
     declarations: []
 })

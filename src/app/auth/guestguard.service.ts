@@ -12,7 +12,7 @@ export class GuestGuardService implements CanActivate {
     constructor(private af: AngularFireAuth, private auth: AuthService, private router: Router) { }
 
 
-    canActivate(): Observable<boolean> {
+    canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
         return this.af.authState.map(val => {
             if (val) {
                 this.router.navigate(['/member/dashboard']);

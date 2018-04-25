@@ -1,29 +1,38 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, AfterViewChecked, Input } from '@angular/core';
 import { MatDialog} from '@angular/material';
 import { TournamentCreateDialogComponent } from './tournament-create-dialog/tournament-create-dialog.component';
 import { TournamentService } from '../../../../shared/tournament.service';
 import { AuthService } from '../../../../auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-tournament-create',
     templateUrl: './tournament-create.component.html',
     styleUrls: ['./tournament-create.component.scss']
 })
-export class TournamentCreateComponent implements OnInit {
+export class TournamentCreateComponent implements OnInit, AfterViewInit {
+    @Input() params;
+    
     name: string = '';
     league: string = '';
     private: boolean = false;
     adminJoin: boolean = true;
     players: number = 10;
 
-    constructor(public dialog: MatDialog, private tournamentService: TournamentService, private authService: AuthService) {
+    constructor(public dialog: MatDialog, private tournamentService: TournamentService, private authService: AuthService, private route: ActivatedRoute, private router: Router) {
 
     }
 
     ngOnInit() {
-        /* this.tournamentService.myTournaments().subscribe(data => {
-            console.log(data);
-        }); */
+    }
+
+    ngAfterViewInit() {
+        this.route.queryParams.subscribe(params => {
+            if(params.create) {
+                setTimeout(() => this.openDialog())
+                this.router.navigate(['member/tournaments'])
+            }
+        })
     }
 
     openDialog(): void {
@@ -51,4 +60,8 @@ export class TournamentCreateComponent implements OnInit {
             }
         });
     }
+}
+
+function calc(a, b) {
+    return a * b
 }

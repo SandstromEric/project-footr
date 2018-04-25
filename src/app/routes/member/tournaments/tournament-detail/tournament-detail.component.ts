@@ -58,14 +58,3 @@ export class TournamentDetailComponent implements OnInit {
         return filterArr.filter(obj => obj["fixtureID"] == fixtureID)[0];
     }
 }
-
-@Component({
-    selector: 'snack-bar-component-example-snack',
-    template: `
-        <span>Testing!</span>
-    `,
-    styles: [`.example-pizza-party { color: hotpink; }`],
-})
-export class TournamentMessage {
-
-}

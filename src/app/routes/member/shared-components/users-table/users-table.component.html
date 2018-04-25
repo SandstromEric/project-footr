@@ -5,17 +5,21 @@
         <ng-container *ngFor="let def of columnDefs" [matColumnDef]="def.columnDef">
             <mat-header-cell *matHeaderCellDef>{{def.headName}}</mat-header-cell>
             <mat-cell *matCellDef="let row">
-                
+
                 <span *ngIf="def.columnDef == 'photo'">
-                    <img [src]="def.cell(row)"  width="32" height="32" alt="">
+                    <img [src]="def.cell(row)" width="32" height="32" alt="">
                 </span>
                 <span *ngIf="def.columnDef == 'action'">
-                    <button *ngIf="userDataType === 'search'" mat-icon-button color="primary" (click)="inviteUser(row)">
-                        <mat-icon>add_circle</mat-icon>
-                    </button>
-                    <button *ngIf="userDataType === 'invited'" mat-icon-button color="warn" (click)="removedInvitedUser(row)">
-                        <mat-icon>remove_circle</mat-icon>
-                    </button>
+                    <ng-container *ngIf="userDataType === 'search'">
+                        <button *ngIf="alreadyJoined(row.uid); else joined" mat-icon-button color="primary" (click)="inviteUser(row)">
+                            <mat-icon>add_circle</mat-icon>
+                        </button>
+                    </ng-container>
+                    <ng-container *ngIf="userDataType === 'invited'">
+                        <button mat-icon-button color="warn" (click)="removedInvitedUser(row)">
+                            <mat-icon>remove_circle</mat-icon>
+                        </button>
+                    </ng-container>
                 </span>
                 <span *ngIf="def.columnDef != 'photo' && def.columnDef != 'action'">
                     {{def.cell(row)}}
@@ -36,3 +40,7 @@
         </div>
     </div> -->
 </div>
+
+<ng-template #joined>
+    <span>Joined</span>
+</ng-template>

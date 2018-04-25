@@ -1,9 +1,11 @@
-<header>
+<header style="padding: 5px 0">
     <div class="container">
-        <div class="logo">
+        <div>
+            <button mat-icon-button (click)="menutoggler()"><mat-icon>{{toggled ? 'clear' : 'menu'}}</mat-icon></button>
+        </div>
+        <div class="logo" style="flex: 1; justify-content: flex-start;">
             <h2>footr</h2>
         </div>
-        <app-navigation></app-navigation>
         <app-user></app-user>
     </div>
 </header>

@@ -10,15 +10,11 @@
                             <mat-icon class="private-indicator">{{tournament.private ? 'lock': 'lock_open'}}</mat-icon>
                             <span class="tournament-name">{{tournament.name}}</span>
                             <div class="tournament-meta">
-                                <!-- <mat-chip-list selectable="false">
-                                    <mat-chip selected="true" color="primary">Players: {{tournament.players}}</mat-chip>
-                                    <mat-chip selected="true" color="accent">League: {{tournament.league}}</mat-chip>
-                                </mat-chip-list> -->
                                 <small class="mat-caption">
                                     Players: {{tournament.players}}
                                 </small>
                                 <small class="mat-caption">
-                                    League: {{tournament.league.caption}}
+                                    {{tournament.league.caption}}
                                 </small>
                                 <a mat-icon-button routerLink="{{tournament.id}}">
                                     <mat-icon>exit_to_app</mat-icon>
@@ -60,7 +56,7 @@
                                     Players: {{invite.players}}
                                 </small>
                                 <small class="mat-caption">
-                                    League: {{invite.league}}
+                                    {{invite.league.caption}}
                                 </small>
                                 <button mat-icon-button color="warn" (click)="removeInvite(invite.id)">
                                     <mat-icon>delete_forever</mat-icon>
