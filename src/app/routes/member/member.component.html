@@ -1,12 +1,12 @@
-<app-header (toggleMenu)="toggleMenu($event)">
+<app-header>
 </app-header>
 
 <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" [opened]="toggled">
+    <mat-drawer [mode]="mode" [opened]="menuActive$ | async" (closedStart)="menuOnClose()">
         <mat-nav-list>
             <mat-list-item color="primary" *ngFor="let link of navLinks" [ngStyle]="{'margin-bottom': link.children ? link.children.length * 40 + 'px': '0px'}">
-                <a matLine [routerLink]="link.path">{{ link.label }}</a>
-                <mat-icon>{{link.icon}}</mat-icon>
+                <mat-icon [routerLink]="link.path">{{link.icon}}</mat-icon>
+                <a matLine [routerLink]="link.path">{{link.label}}</a>
                 <mat-nav-list *ngIf="link.children" dense>
                     <mat-list-item *ngFor="let child of link.children">       
                         <ng-container *ngIf="child.path">
@@ -19,8 +19,10 @@
         </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content>
+        <app-view-title></app-view-title>
         <div class="site-container">
             <router-outlet></router-outlet>
         </div>
+        <app-messages></app-messages>
     </mat-drawer-content>
 </mat-drawer-container>

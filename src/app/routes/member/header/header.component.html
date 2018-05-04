@@ -1,11 +1,16 @@
-<header style="padding: 5px 0">
-    <div class="container">
-        <div>
-            <button mat-icon-button (click)="menutoggler()"><mat-icon>{{toggled ? 'clear' : 'menu'}}</mat-icon></button>
-        </div>
-        <div class="logo" style="flex: 1; justify-content: flex-start;">
-            <h2>footr</h2>
-        </div>
-        <app-user></app-user>
-    </div>
+<header>
+    <mat-toolbar color="primary">
+        <span>
+            <button mat-icon-button (click)="menutoggler()">
+                <mat-icon>{{menuActive ? 'clear' : 'menu'}}</mat-icon>
+            </button>
+        </span>
+        <span>Tourny</span>
+        <!--Fill remaining space-->
+        <span class="fill-space"></span>
+        <span>
+            <app-user></app-user>
+        </span>
+        
+    </mat-toolbar>
 </header>

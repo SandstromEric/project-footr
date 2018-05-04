@@ -1,0 +1,21 @@
+// Import theming functions
+@import '~@angular/material/theming';
+// Import your custom theme
+@import '../../../../../themes/dark-theme.scss';
+
+.prediction {
+	position: absolute;
+	right: 0;
+	top: 0;
+	input {
+		width: 20px;
+		height: 25px;
+		border-radius: 2px;
+		border: 1px solid mat-color($app-primary);
+		padding: 0;
+		text-align: center;
+		&::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+		}
+	}
+}

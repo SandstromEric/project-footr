@@ -13,6 +13,7 @@ import { MaterialModule } from './material/material.module';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/authguard.service';
 import { GuestGuardService } from './auth/guestguard.service';
+import * as firebase from 'firebase/app';
 
 @NgModule({
     declarations: [

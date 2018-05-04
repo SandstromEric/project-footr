@@ -1,28 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { ObservableMedia } from '@angular/flex-layout';
+import { MemberService } from '../../shared/member.service';
+
+interface Links {
+    label: string,
+    path: string,
+    icon: string,
+    parameters?: any,
+    children?: Array<Links>
+}
+
 @Component({
     selector: 'app-member',
     templateUrl: './member.component.html',
     styleUrls: ['./member.component.scss']
 })
 export class MemberComponent implements OnInit {
-    toggled: boolean;
-    navLinks = [
+    menuActive$: any;
+    mode: string;
+    navLinks: Links[] = [
         { label: 'Dashboard', path: 'dashboard', icon: 'home' },
-        { label: 'Tournaments', path: 'tournaments', icon: 'apps', children: [
-            {label: 'Create', icon: 'add', path: 'tournaments', parameter: {create: true}},
-            {label: 'Find', icon: 'search', path: 'tournaments/finder'}
-        ]},
+        { label: 'Competitions', path: 'competitions', icon: 'apps'},
         {label: 'My profile', path: 'user-profile', icon: 'account_circle'}
     ];
-    constructor() { }
+    constructor(private media: ObservableMedia, private ms: MemberService) { }
 
     ngOnInit() {
+        this.menuActive$ = this.ms.getMenuActive();
+        this.media.subscribe(data => {
+            this.changeSideNavMode();
+        })
+    }
+   
+    /* toggleMenu($event) {
+        this.menuActive = $event;
+    } */
 
+    changeSideNavMode() {
+        if(this.media.isActive('xs') || this.media.isActive('sm')) {
+            this.mode = 'open';
+            this.ms.setMenuActive(false);
+        } else {
+            this.mode = 'side';
+            this.ms.setMenuActive(true);
+        }
     }
 
-    toggleMenu($event) {
-        this.toggled = $event;
+    menuOnClose() {
+        this.ms.setMenuActive(false);
     }
 }

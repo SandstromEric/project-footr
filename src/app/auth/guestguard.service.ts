@@ -16,7 +16,6 @@ export class GuestGuardService implements CanActivate {
         return this.af.authState.map(val => {
             if (val) {
                 this.router.navigate(['/member/dashboard']);
-                console.log(val);
             } 
             return !val
         }).take(1)

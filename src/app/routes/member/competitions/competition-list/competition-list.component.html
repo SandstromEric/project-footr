@@ -1,0 +1,41 @@
+<div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="caption">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Caption </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.caption}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="matches">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Total Games </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.numberOfGames}} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="matchday">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Matchday </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.currentMatchday}}/{{row.numberOfMatchdays}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="teams">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Teams </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.numberOfTeams}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-icon-button [routerLink]="row.id">
+                    <mat-icon>exit_to_app</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>row
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

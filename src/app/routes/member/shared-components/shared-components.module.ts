@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { MaterialModule } from '../../../material/material.module';
 import { TournamentFilterListComponent } from './tournament-filter-list/tournament-filter-list.component';
+import { ViewTitleComponent } from './view-title/view-title.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   imports: [
@@ -11,11 +13,15 @@ import { TournamentFilterListComponent } from './tournament-filter-list/tourname
   ],
   declarations: [
     UsersTableComponent,
-    TournamentFilterListComponent
+    TournamentFilterListComponent,
+    ViewTitleComponent,
+    MessagesComponent
   ],
   exports: [
     UsersTableComponent,
-    TournamentFilterListComponent
+    TournamentFilterListComponent,
+    ViewTitleComponent,
+    MessagesComponent
   ]
 })
 export class SharedComponentsModule { }

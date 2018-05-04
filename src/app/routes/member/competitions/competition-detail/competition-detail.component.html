@@ -1,0 +1,35 @@
+<ng-container *ngIf="competition; else Loading">
+    <mat-grid-list *ngIf="gridTiles" rowHeight="300px" cols="4" gutterSize="20px">
+        <mat-grid-tile [colspan]="colspan" *ngFor="let tile of gridTiles" class="mat-elevation-z3">
+            <mat-grid-tile-header>
+                <span>
+                    {{tile.header}}
+                </span>
+                <div class="buttons" *ngIf="tile.buttons as buttons">
+                    <ng-container *ngFor="let button of buttons">
+                        <button mat-icon-button (click)="tileHeaderButton(tile, button)">
+                            <mat-icon>
+                                {{button.icon}}
+                            </mat-icon>
+                        </button>
+                    </ng-container>
+                </div>
+            </mat-grid-tile-header>
+            <div class="tile-content">
+                <ng-container [ngSwitch]="tile.header">
+                    <ng-container *ngSwitchCase="'Predictions'">
+                        <app-competition-prediction-list></app-competition-prediction-list>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'Groups'">
+                        <app-competition-group-list></app-competition-group-list>
+                    </ng-container>
+
+                </ng-container>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</ng-container>
+<ng-template #Loading>
+    <mat-spinner strokeWidth="12"></mat-spinner>
+</ng-template>

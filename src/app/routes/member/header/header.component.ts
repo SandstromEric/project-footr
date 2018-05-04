@@ -1,4 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ObservableMedia } from '@angular/flex-layout';
+import { MemberService } from '../../../shared/member.service';
 
 @Component({
     selector: 'app-header',
@@ -6,16 +8,17 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    @Output() toggleMenu: EventEmitter<any> = new EventEmitter();
-    toggled: boolean = true;
-    constructor() { }
+    menuActive: any;
+    constructor(private media: ObservableMedia, private ms: MemberService) { }
 
     ngOnInit() {
-        this.toggleMenu.emit(this.toggled);
+        this.ms.getMenuActive().subscribe(isActive => {
+            this.menuActive = isActive;
+        });
     }
 
     menutoggler() {
-        this.toggled = !this.toggled;
-        this.toggleMenu.emit(this.toggled);
+        this.ms.setMenuActive(!this.menuActive);
     }
+
 }

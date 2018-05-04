@@ -1,0 +1,8 @@
+// Import theming functions
+@import '~@angular/material/theming';
+// Import your custom theme
+@import '../../../../themes/dark-theme.scss';
+
+mat-toolbar {
+	background: mat-color($app-primary, 700) !important;
+}

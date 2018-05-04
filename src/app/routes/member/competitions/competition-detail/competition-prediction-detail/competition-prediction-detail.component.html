@@ -1,0 +1,16 @@
+<div class="teams" matLine>
+    <span class="home">{{game.homeTeam.name}}</span>
+    <span class="versus">vs</span>
+    <span class="away">{{game.awayTeam.name}}</span>
+</div>
+<div class="date" matLine>
+    {{game.date | date: 'MMM d, y, h:mm a'}}
+</div>
+<div class="prediction">
+    <input [(ngModel)]="homeGoals" (ngModelChange)="predictionValidation()" (focusout)="resetPrediction()" type="number" min="0" max="99">
+    <span>-</span>
+    <input [(ngModel)]="awayGoals" (ngModelChange)="predictionValidation()" (focusout)="resetPrediction()" type="number" min="0" max="99">
+    <button mat-icon-button color="accent" (click)="setPrediction()" [disabled]="disabled">
+        <mat-icon>check_circle</mat-icon>
+    </button>
+</div>

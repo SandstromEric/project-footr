@@ -8,10 +8,9 @@ type DocPredicate<T> = string | AngularFirestoreDocument<T>;
 
 @Injectable()
 export class FirestoreService {
-
-    constructor(
-        private afs: AngularFirestore
-    ) { }
+    constructor(private afs: AngularFirestore) { 
+        
+    }
 
     col<T>(ref: CollectionPredicate<T>, queryFn?): AngularFirestoreCollection<T> {
         return typeof ref === 'string' ? this.afs.collection<T>(ref, queryFn) : ref

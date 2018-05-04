@@ -25,8 +25,6 @@ export interface Tournament {
     players: number;
 }
 
-
-
 @Injectable()
 export class TournamentService {
     currentUser = this.afAuth.auth.currentUser;

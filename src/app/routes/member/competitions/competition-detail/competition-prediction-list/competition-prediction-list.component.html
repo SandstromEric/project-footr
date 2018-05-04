@@ -1,0 +1,14 @@
+<ng-container *ngIf="games$ | async as games; else Loading">
+    <mat-list dense fxLayout="row wrap">
+        <ng-container *ngFor="let game of games; let i = index">
+            <mat-list-item>
+                <app-competition-prediction-detail [game]="game" [competitionId]="competitionId"></app-competition-prediction-detail>
+            </mat-list-item>
+            <mat-divider *ngIf="games.length !== i+1"></mat-divider>
+        </ng-container>
+    </mat-list>
+</ng-container>
+
+<ng-template #Loading>
+    <mat-spinner></mat-spinner>
+</ng-template>

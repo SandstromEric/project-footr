@@ -1,0 +1,25 @@
+
+mat-grid-list {
+	mat-grid-tile {
+		background: #fff;
+		border-radius: 3px;
+		mat-grid-tile-header {
+			background: #36454f;
+
+			.buttons {
+				position: absolute;
+				right: 0;
+				display: flex;
+			}
+		}
+
+		.tile-content {
+			position: absolute;
+			top: 48px;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			overflow: auto;
+		}
+	}
+}
