@@ -6,6 +6,7 @@ import { MemberService } from '../../../../shared/member.service';
 
 interface GridTile {
     header: string;
+    path?: string;
     buttons?: GridHeaderButton[];
 }
 
@@ -39,15 +40,15 @@ export class CompetitionDetailComponent implements OnInit {
         })
 
         this.gridTiles = [
-            {header: 'Predictions', buttons: [
+            {header: 'Predictions', path:'predictions', buttons: [
                 {type: 'path', icon: 'arrow_forward'},
             ]},
-            {header: 'Groups', buttons: [
+            {header: 'Groups', path:'groups', buttons: [
                 {type: 'create', icon: 'add'},
                 {type: 'path', icon: 'arrow_forward'},
             ]},
-            {header: 'Teams'},
-            {header: 'Standings'},
+            {header: 'Teams', path:'teams'},
+            {header: 'Standings', path:'standings'},
         ]
 
         this.media.subscribe(data => {

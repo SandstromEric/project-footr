@@ -17,7 +17,7 @@ export class CompetitionPredictionListComponent implements OnInit {
 
     ngOnInit() {
         this.cs.getCompetitionId().subscribe(id => id ? this.competitionId = id: null)
-        this.route.params.subscribe(params => this.cs.setCompetitionId(params.id))
+        //this.route.params.subscribe(params => this.cs.setCompetitionId(params.id))
         this.games$ = this.cs.getCompetitionFixtures(this.competitionId);
     }
 

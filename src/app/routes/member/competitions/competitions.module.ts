@@ -20,9 +20,14 @@ const competitionsRoutes: Routes = [
     {
         path: '', component: CompetitionsComponent, children: [
             { path: '', component: CompetitionListComponent},
-            { path: ':id', component: CompetitionDetailComponent},
-            { path: ':id/predictions', component: CompetitionPredictionListComponent},
-            { path: ':id/groups', component: CompetitionGroupListComponent}
+            { path: ':id', component: CompetitionDetailComponent, children: [
+                { path: '', redirectTo: 'predictions'},
+                { path: 'predictions', component: CompetitionPredictionListComponent},
+                { path: 'groups', component: CompetitionGroupListComponent},
+                { path: 'teams', component: CompetitionGroupListComponent},
+                { path: 'standings', component: CompetitionGroupListComponent},
+            ]},
+            
               
         ]
     }

@@ -23,3 +23,16 @@ mat-grid-list {
 		}
 	}
 }
+
+// Overwrite for Angular Material Tabs CSS
+.mat-tab-label-container {
+    .mat-tab-label  {
+        opacity: 1;
+        padding: 0;
+    }
+} 
+.mat-tab-group.mat-primary {
+     .mat-ink-bar {
+          display: none;
+      }
+}

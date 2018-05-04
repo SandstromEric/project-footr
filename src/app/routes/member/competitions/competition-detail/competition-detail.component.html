@@ -1,5 +1,11 @@
 <ng-container *ngIf="competition; else Loading">
-    <mat-grid-list *ngIf="gridTiles" rowHeight="300px" cols="4" gutterSize="20px">
+    <nav mat-tab-nav-bar>
+        <a mat-tab-link *ngFor="let link of gridTiles" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive" [disabled]="!link.path">
+            {{link.header}}
+        </a>
+    </nav>
+    <router-outlet></router-outlet>
+    <!-- <mat-grid-list *ngIf="gridTiles" rowHeight="300px" cols="4" gutterSize="20px">
         <mat-grid-tile [colspan]="colspan" *ngFor="let tile of gridTiles" class="mat-elevation-z3">
             <mat-grid-tile-header>
                 <span>
@@ -28,7 +34,7 @@
                 </ng-container>
             </div>
         </mat-grid-tile>
-    </mat-grid-list>
+    </mat-grid-list> -->
 </ng-container>
 <ng-template #Loading>
     <mat-spinner strokeWidth="12"></mat-spinner>
