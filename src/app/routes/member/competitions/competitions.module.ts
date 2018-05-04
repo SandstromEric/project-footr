@@ -11,9 +11,9 @@ import { CompetitionsComponent } from './competitions.component';
 import { CompetitionListComponent } from './competition-list/competition-list.component';
 import { CompetitionDetailComponent } from './competition-detail/competition-detail.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
-import { CompetitionPredictionListComponent } from './competition-detail/competition-prediction-list/competition-prediction-list.component';
-import { CompetitionPredictionDetailComponent } from './competition-detail/competition-prediction-detail/competition-prediction-detail.component';
-import { CompetitionGroupListComponent } from './competition-group-list/competition-group-list.component';
+import { CompetitionPredictionListComponent } from './competition-predictions/competition-prediction-list/competition-prediction-list.component';
+import { CompetitionPredictionDetailComponent } from './competition-predictions/competition-prediction-detail/competition-prediction-detail.component';
+import { CompetitionGroupListComponent } from './competition-groups/competition-group-list/competition-group-list.component';
 
 
 const competitionsRoutes: Routes = [

@@ -9,6 +9,7 @@ import 'rxjs/add/observable/combineLatest';
 import * as firebase from 'firebase/app';
 import { FirestoreService } from './firestore.service';
 import { MemberService } from './member.service';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 /* import { DocPipe } from './doc.pipe'; */
 
 export interface User {
@@ -32,8 +33,8 @@ export interface Tournament {
 export class CompetitionsService {
     userId: string;
     private curCompetitionId = new BehaviorSubject<string>(null);
-    
-    constructor(private db: FirestoreService, private authService: AuthService, private afAuth: AngularFireAuth, private ms: MemberService) {
+    private curCompetition = new BehaviorSubject<any>(null);
+    constructor(private db: FirestoreService, private authService: AuthService, private afAuth: AngularFireAuth, private ms: MemberService, private route: ActivatedRoute) {
         this.authService.user.subscribe(user => {
             if(user) this.userId = user.uid;
         })
