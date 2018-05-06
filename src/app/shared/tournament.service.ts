@@ -16,7 +16,7 @@ export interface User {
     photoURL?: string;
 }
 
-export interface Tournament {
+export interface CompetitionGroup {
     admin: string;
     adminJoin: boolean;
     name: string;

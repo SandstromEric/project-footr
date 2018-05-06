@@ -48,7 +48,6 @@ export class CompetitionsService {
         return this.curCompetitionId.asObservable();
     }
 
-
     getCompetitions(): Observable<any> {
         return this.db.col$('footballData/competitions/data');
     }

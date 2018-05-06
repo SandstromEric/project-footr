@@ -11,6 +11,7 @@ export const environment = {
         databaseURL: "https://project-footr.firebaseio.com",
         projectId: "project-footr",
         storageBucket: "project-footr.appspot.com",
-        messagingSenderId: "568588022246"
-    }
+        messagingSenderId: "568588022246",
+    },
+    googleMapsKey: "AIzaSyB7rVBm75jmINrqg7XyCqida0Ibm1Fohs8"
 };

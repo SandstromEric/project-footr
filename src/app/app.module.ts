@@ -9,7 +9,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-
+import { AgmCoreModule } from '@agm/core';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/authguard.service';
 import { GuestGuardService } from './auth/guestguard.service';
@@ -27,7 +27,10 @@ import * as firebase from 'firebase/app';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule, // imports firebase/firestore, only needed for database features
         AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-        AngularFireStorageModule // imports firebase/storage only needed for storage features
+        AngularFireStorageModule, // imports firebase/storage only needed for storage features
+        AgmCoreModule.forRoot({
+            apiKey: environment.googleMapsKey
+        })
     ],
     providers: [AuthService, GuestGuardService, AuthGuardService],
     bootstrap: [AppComponent]

@@ -13,8 +13,7 @@ mat-toolbar {
 	background: mat-color($app-primary, 700) !important;
 }
 .site-container {
-	max-width: 1280px;
-	margin: 0 auto;
+	//max-width: 1280px;
 	box-sizing: border-box; 
 	min-height: calc(100vh - (64px * 2));
 	@media (max-width: 599px) {

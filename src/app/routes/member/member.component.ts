@@ -22,8 +22,14 @@ export class MemberComponent implements OnInit {
     mode: string;
     navLinks: Links[] = [
         { label: 'Dashboard', path: 'dashboard', icon: 'home' },
-        { label: 'Competitions', path: 'competitions', icon: 'apps'},
-        {label: 'My profile', path: 'user-profile', icon: 'account_circle'}
+        { label: 'Competitions', path: 'competitions', icon: 'apps' },
+        { label: 'Leaderboards', path: 'leaderboards', icon: 'stars', /* children: [
+            { label: 'World', path: 'leaderboards/world', icon: 'star_rate' },
+            { label: 'Region', path: 'leaderboards/country', icon: 'star_rate' },
+            { label: 'Local', path: 'leaderboards/local', icon: 'star_rate' },
+            { label: 'Groups', path: 'leaderboards/groups', icon: 'star_rate' },
+        ] */ },
+        { label: 'My profile', path: 'user-profile', icon: 'account_circle' },
     ];
     constructor(private media: ObservableMedia, private ms: MemberService) { }
 
@@ -33,13 +39,13 @@ export class MemberComponent implements OnInit {
             this.changeSideNavMode();
         })
     }
-   
+
     /* toggleMenu($event) {
         this.menuActive = $event;
     } */
 
     changeSideNavMode() {
-        if(this.media.isActive('xs') || this.media.isActive('sm')) {
+        if (this.media.isActive('xs') || this.media.isActive('sm')) {
             this.mode = 'open';
             this.ms.setMenuActive(false);
         } else {

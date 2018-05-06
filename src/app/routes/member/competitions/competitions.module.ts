@@ -13,7 +13,7 @@ import { CompetitionDetailComponent } from './competition-detail/competition-det
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { CompetitionPredictionListComponent } from './competition-predictions/competition-prediction-list/competition-prediction-list.component';
 import { CompetitionPredictionDetailComponent } from './competition-predictions/competition-prediction-detail/competition-prediction-detail.component';
-import { CompetitionGroupListComponent } from './competition-groups/competition-group-list/competition-group-list.component';
+import { CompetitionGroupListComponent } from './competition-detail/competition-groups/competition-group-list/competition-group-list.component';
 
 
 const competitionsRoutes: Routes = [
@@ -26,9 +26,7 @@ const competitionsRoutes: Routes = [
                 { path: 'groups', component: CompetitionGroupListComponent},
                 { path: 'teams', component: CompetitionGroupListComponent},
                 { path: 'standings', component: CompetitionGroupListComponent},
-            ]},
-            
-              
+            ]},   
         ]
     }
 ];
